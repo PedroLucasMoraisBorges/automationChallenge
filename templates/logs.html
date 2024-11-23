@@ -1,0 +1,136 @@
+{% extends 'components/base.html' %}
+{% load static %}
+
+{% block title %}
+    Logs
+{% endblock %}
+
+{% block style %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        nav {
+            background-color: #4CAF50;
+            padding: 20px 40px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: .3s;
+            padding: .5rem .7rem;
+            border-radius: 15px;
+        }
+
+        nav a:hover {
+            background-color: #1e1e1ea9;
+            transform: scale(1.05);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .log-table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0; /* Aplicando a margem */
+        }
+
+        .log-table th, .log-table td {
+            padding: 15px; /* Aumentando o padding para maior espaçamento */
+            text-align: left;
+            border: 1px solid #ddd;
+            font-size: 1.1rem; /* Aumentando o tamanho da fonte */
+        }
+
+        .log-table th {
+            background-color: #f2f2f2;
+            font-size: 1.2rem; /* Aumentando o tamanho da fonte do cabeçalho */
+        }
+
+        .log-card {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            min-height: 115px;
+        }
+
+        .accepted {
+            background-color: #d4edda;
+        }
+
+        .rejected {
+            background-color: rgba(255, 204, 0, 0.552)
+        }
+
+        .error {
+            background-color: #f8d7da;
+        }
+
+        .card-status {
+            font-weight: bold;
+        }
+
+        .card-description {
+            font-size: 1.1rem; /* Aumentando a fonte da descrição */
+            color: #555;
+        }
+
+        .card-date {
+            font-size: 1rem; /* Aumentando a fonte da data */
+            color: #888;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <nav>
+        <div>Gerenciamento de Logs</div>
+        <div>
+            <a href="{% url 'docs' %}">Documentos</a>
+            <a href="#">Logs</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <table class="log-table">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Descrição</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                    <tr class="{% if log.status == 'error' %}error{% elif log.status == 'arquivo negado' %}rejected{% else %}accepted{% endif %}">
+                        <td class="card-status">{{ log.status }}</td>
+                        <td class="card-description">{{ log.description }}</td>
+                        <td class="card-date">{{ log.dtLog }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

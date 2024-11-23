@@ -1,0 +1,146 @@
+{% extends 'components/base.html' %}
+{% load static %}
+
+{% block title %}
+    Documentos Inseridos
+{% endblock %}
+
+{% block style %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        nav {
+            background-color: #4CAF50;
+            padding: 20px 40px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: .3s;
+            padding: .5rem .7rem;
+            border-radius: 15px;
+        }
+
+        nav a:hover {
+            background-color: #1e1e1ea9;
+            transform: scale(1.05);
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .list {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .accepted {
+            background-color: #d4edda;
+        }
+
+        .rejected {
+            background-color: #f8d7da;
+        }
+
+        .list h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .card {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            min-height: 115px;
+        }
+
+        .card h3 {
+            margin: 0 0 5px;
+        }
+
+        .card p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: .3s;
+        }
+
+        .card a:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <nav>
+        <div>Gerenciamento de Documentos</div>
+        <div>
+            <a href="#">Documentos</a>
+            <a href="{% url 'logs' %}">Logs</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Lista de Documentos Aceitos -->
+        <div class="list accepted">
+            <h2>Documentos Aceitos</h2>
+            {% for doc in accepted %}
+                <div class="card">
+                    <h3>{{doc.docName}}</h3>
+                    <p>Autor: {{doc.author}}</p>
+                    <p>Data: {{doc.dtRegister}}</p>
+                    <a target="_blank" href="{{doc.url}}">Ver Documento</a>
+                </div>
+            {% endfor %}
+            <!-- Adicionar mais cartões aqui -->
+        </div>
+
+        <!-- Lista de Documentos Negados -->
+        <div class="list rejected">
+            <h2>Documentos Negados</h2>
+            {% for doc in denied %}
+                <div class="card">
+                    <h3>{{doc.docName}}</h3>
+                    <p>Autor: {{doc.author}}</p>
+                    <p>Data: {{doc.dtRegister}}</p>
+                    <a target="_blank" href="{{doc.url}}">Ver Documento</a>
+                </div>
+            {% endfor %}
+            <!-- Adicionar mais cartões aqui -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
