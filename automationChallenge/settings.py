@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1', 
     'localhost', 
-    '31df-186-249-84-69.ngrok-free.app'
+    '4ca5-201-131-172-237.ngrok-free.app' # Substitua pela url gerada
 ]
 
 # Application definition
@@ -131,6 +131,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+EMAIL_ADMIN = 'pedrulucas000@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

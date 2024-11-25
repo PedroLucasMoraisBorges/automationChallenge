@@ -13,6 +13,7 @@ from datetime import datetime
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 import threading
+from automationChallenge.settings import EMAIL_ADMIN
 
 # functions
 def send_email_error(request, log : Log):
@@ -24,7 +25,7 @@ def send_email_error(request, log : Log):
                 'log': log,
             }
         )
-        EmailMessage(to = ['pedrulucas000@gmail.com'], subject = subject, body = body).send()
+        EmailMessage(to = [EMAIL_ADMIN], subject = subject, body = body).send()
 
     email_thread = threading.Thread(target=threadingFunction)
     email_thread.start()
